@@ -1,0 +1,23 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+main.ipynb
+
+data/temporary.ipynb
+data/option_data.csv
+data/option_data_2.csv
+data/final_dataset.csv
+
+data/*.joblib
+
+data/datasets_links
+
+main.py
