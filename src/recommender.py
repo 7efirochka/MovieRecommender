@@ -1,12 +1,7 @@
 import pandas as pd
 import numpy as np
 import ast
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.metrics.pairwise import cosine_similarity
-import json
-from sklearn.preprocessing import MultiLabelBinarizer
 import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
 from pathlib import Path
 
 CURRENT_DIR = Path(__file__).parent
@@ -44,8 +39,6 @@ def recommend_by_hybride(title_query, n = 5):
     
         indexes.append(matches.index[0])
 
-    print(indexes)
-
     sim_vectors = [cosine_sim_hybride[idx] for idx in indexes]
 
     avg_sim = np.mean(sim_vectors, axis = 0)
@@ -54,8 +47,16 @@ def recommend_by_hybride(title_query, n = 5):
     for idx in indexes:
         avg_sim[idx] = -1
 
+
     sim_scores = list(enumerate(avg_sim))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+    input_years = df.loc[indexes, "year"]
+    if (input_years >= 2015).all():
+        valid_indiced = set(df[df["year"]>= 2015].index)
+        sim_scores = [(idx, score) for idx, score in sim_scores if idx in valid_indiced]
+
+
     sim_scores = sim_scores[0:n+5]
     movie_indices = [i[0] for i in sim_scores]
     
@@ -67,9 +68,9 @@ def recommend_by_hybride(title_query, n = 5):
     
     result = result.drop(columns=["diff_years"])
 
-    return result[0:n].to_dict(orient="records")
+    return result[0:n+5].to_dict(orient="records")
 
-# print(recommend_by_hybride("The Matrix, KPop Demon Hunters"))
+
 
 
 
