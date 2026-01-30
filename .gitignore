@@ -20,4 +20,6 @@ data/*.joblib
 
 data/datasets_links
 
-main.py
+main.pys
+
+commands.txt

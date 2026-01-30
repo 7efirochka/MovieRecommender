@@ -1,0 +1,23 @@
+# Исключаем всё, что не нужно в production-контейнере
+__pycache__/
+*.py[co]
+.git/
+.venv
+main.ipynb
+
+# Исходные данные и скрипты обучения — НЕ нужны в контейнере
+data/option_data.csv
+data/option_data_2.csv
+data/final_dataset.csv
+data/temporary.ipynb
+data/datasets_links/
+
+
+# Скрипты обучения
+scripts/
+
+# Временные файлы
+*.log
+.DS_Store
+
+commands/txt

@@ -57,6 +57,7 @@ def recommend_by_hybride(title_query, n = 5):
         sim_scores = [(idx, score) for idx, score in sim_scores if idx in valid_indiced]
 
 
+
     sim_scores = sim_scores[0:n+5]
     movie_indices = [i[0] for i in sim_scores]
     
@@ -68,7 +69,7 @@ def recommend_by_hybride(title_query, n = 5):
     
     result = result.drop(columns=["diff_years"])
 
-    return result[0:n+5].to_dict(orient="records")
+    return result[0:n].to_dict(orient="records")
 
 
 
