@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import Optional
 from .recommender import recommend_by_hybride
 
 app = FastAPI(
@@ -28,3 +28,8 @@ async def reccomend(request: RecommendationRequest):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")
+    
+    
+@app.get("/health")
+async def health_check():
+    return {"status": "OK", "model_loaded": True}
